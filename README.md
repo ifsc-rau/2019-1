@@ -9,7 +9,7 @@ Conta com a colaboração dos professores:
 - Davi Bernardo Silva
 - Edilson Hipolito da Silva
 - Frank Juergen Knaesel
-- Marco
+- Marco Antonio Torrez Rojas
 
 ## Projetos de 2019-2
 - [Bebedouro Automático para cãe e gatos](https://github.com/ifsc-rau/2019-1/tree/master/Bebedouro%20Autom%C3%A1tico%20para%20c%C3%A3e%20e%20gatos)
