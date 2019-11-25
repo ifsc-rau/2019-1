@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/ViewCalendar.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/Alerts.css"/>
+</h:head>
+<ui:decorate template="#{UserOnline.template()}">
+<ui:define name="centro">
+    <div class="errors" style="margin-top: 90px;
+                                    margin-right: 15px;
+                                    position: absolute;
+                                    top: 15px;
+                                    right: 0;
+                                    z-index: 2">
+    </div>
+    <div class="container-fluid" style="display: flex">
+        <button class="btn" onclick="getPDF()">
+            <img src="resources/img/picture_as_pdf-24px.svg" alt="pdf"/>
+            GERAR PDF
+        </button>
+    </div>
+
+    <div id="renderPDF" class="container-fluid">
+        <div class="div-b">
+            <div class="row">
+                <h:form>
+                    <img src="resources/img/imglogoifsc.png" alt="logo" style="width: 1200px; padding: 8px; float: left; max-height: 200px"/>
+                    <div id="div-titulo" class="col order-3">
+                    </div>
+                </h:form>
+            </div>
+            <div id="div-calendario"></div>
+            <div class="div-b-a"></div>
+        </div>
+        <div class="div-c">
+            <div class="row">
+                <div class="col ">
+                    <div id="div-legendas"></div>
+                </div>
+                <div class="col order-12">
+                    <div  id="div-legendaFeriados"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h:outputScript name="jquery-3.3.1.min.js" library="js"/>
+
+    <h:outputScript name="jspdf.min.js" library="js"/>
+    <h:outputScript name="html2canvas.min.js" library="js"/>
+    <h:outputScript library="js"
+                    name="Calendar.js"/>
+    <h:outputScript library="js"
+                    name="FunctionsCalendar.js"/>
+    <h:outputScript name="Alerts.js" library="js"/>
+
+    <h:outputScript name="ViewCalendar.js" library="js"/>
+</ui:define>
+</ui:decorate>
+</html>

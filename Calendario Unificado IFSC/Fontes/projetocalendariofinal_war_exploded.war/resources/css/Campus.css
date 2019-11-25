@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    margin: 80px auto 0;
+    max-width: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.content{
+    width: 100%;
+    margin-top: 50px;
+    padding: 30px;
+}
+.content form label{
+    font-size: 14px;
+    color: #444;
+    font-weight: bold;
+    margin-bottom: 8px;
+    float: left;
+}
+.content form{
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 500px;
+    flex-direction: column;
+}
+.content button.btn{
+    border: 0;
+    border-radius: 2px;
+    width: 100%;
+    height: 42px;
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #f05a5b;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+  
+}
+.content form input{
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    height: 45px;
+    padding: 0 15px;
+    font-size: 16px;
+}
+
+.content form select{
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    height: 45px;
+    padding: 0 15px;
+    font-size: 16px;
+}
+.content button.btn:hover{
+    background: #e14f50;
+}
+
+.content > p{
+    font-size: 22px;
+    line-height: 30px;
+    margin-bottom: 30px;
+}
+
+
+  

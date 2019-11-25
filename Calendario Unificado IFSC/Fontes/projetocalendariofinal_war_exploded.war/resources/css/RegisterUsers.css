@@ -1,0 +1,82 @@
+
+.container label{
+    float: left;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+}
+.container img{
+    width: 180px;
+}
+.container form{
+    box-sizing: border-box;
+}
+.container input{
+    height: 45px;
+}
+.container select{
+    min-height: 45px;
+}
+.container #email{
+    max-width: 800px;
+}
+.container hr{
+    opacity: 0.2;
+    background-color: black;
+    margin: 0 5px 20px 5px;
+}
+.container input[type="submit"]{
+    min-height: 50px;
+    border-radius: 5px;
+}
+.menssageError{
+    background-color: rgb(220, 53, 69);
+    color: white;
+}
+.menssageAlert{
+    background-color: #ffc34d;
+    color: black;
+}
+.alert{
+    padding: 20px 70px 20px 10px;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    max-height: 100px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: left;
+    width: 100%;
+
+
+}
+.alertSucess{
+    background-color: rgb(40, 167, 69);
+    color: white;
+}
+.error-enter{
+    animation: move-enter 500ms;
+}
+.error-hide{
+    animation:move-hide-exit 500ms;
+}
+
+@keyframes move-enter {
+    from{
+        opacity: 0;
+        transform: translateX(35%);
+    }to{
+         opacity: 1;
+         transform: translateY(0%);
+     }
+}
+@keyframes move-hide-exit {
+    from{
+        opacity: 1;
+        transform: translateY(0%);
+    }to{
+         opacity: 0;
+         transform: translateX(35%);
+     }
+}

@@ -1,0 +1,40 @@
+.formsDT form{
+    padding: 50px 10px 10px 5px;
+}
+
+.formsDT table,tbody, td, tr, th{
+    border: 0;
+}
+.formsDT button{
+    width: 100px;
+    height: 65px;
+}
+table{
+    border-radius: 80px;
+}
+.formsDT img{
+    width: 40px;
+}
+.formsDT table td{
+    font-weight: bolder;
+}
+.formsDT table{
+    width: 100%;
+    text-align: center;
+}
+.formsDT thead th{
+    background: rgb(40, 167, 69);
+    font-weight: bolder;
+    font-size: 26px;
+}
+.formsDT tbody td{
+    font-size: 24px;
+}
+.container-fluid{
+    padding-top: 50px;
+}
+
+.empty{
+    font-size: 24px;
+    display: block;
+}

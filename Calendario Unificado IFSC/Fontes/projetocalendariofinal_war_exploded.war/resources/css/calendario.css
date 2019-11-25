@@ -1,0 +1,167 @@
+body{
+    padding: 0;
+    margin: 0;
+    white-space: nowrap
+}
+
+table, td, th {
+    padding: 2px;
+    font-size: 18px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+#table-calendario td,th{
+    overflow: auto;
+}
+.fimDeSemana{
+    background-color: #c2c2a3;
+}
+.col-meses{
+    width: 200px;
+    background-color:  #bfff00;
+    padding: 0 30px 0 30px;
+    font-weight: 700;
+    font-size: 20px;
+}
+.row-diasSemana{
+    font-weight: bolder;
+    background-color:  #bfff00;
+}
+.input-titulos{
+    width: 1200px;
+    text-align: center;
+}
+#td-titulo, #header-titulos{
+    background-color:  #bfff00;
+    font-weight: 900;
+    font-size: 18px;
+    padding: 0;
+}
+#table-titulos td{
+    font-weight: 900;
+    font-size: 20px;
+    padding: 0;
+}
+#btnSalvar, #btnCancelar, #btnLimpar{
+    width: 200px;
+}
+button, input{
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    width: 100%;
+}
+.dateHalf{
+    color: white;
+}
+#tdLengendaSemeste{
+    background-color: #004080;
+}
+#tdLegendaAtvPdg{
+    background-color: #ff66cc;
+    width: 200px;
+}
+#tdLegendaFerias{
+    background-color: #00b3b3;
+}
+#tdLegendaFeriados{
+    background-color: #ff0000;
+}
+#tdLegendaRecesso{
+    background-color: #ff9933;
+}
+#tdPontoFacultativo{
+    background-color: #cccc00;
+}
+#tdLegendaSolenidade{
+    background-color: #ffff00;
+}
+#headerLegendaFeriados{
+    font-weight: 700;
+    font-size: 18px;
+    padding: 0;
+    background-color: #ff0000;
+}
+#tableLegendaFeriados{
+    max-width: 450px;
+    width: 100%;
+}
+#tableLegendaFeriados .texto-legenda{
+    text-align: left;
+    max-width: 220px;
+    width: 100%;
+    font-family: "latoregular", "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+#table-legends .texto-legenda{
+    text-align: left;
+    padding-right: 150px;
+    width: 200px;
+    font-family: "latoregular", "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
+.th-ferias{
+    background-color: rgb(0, 179, 179);
+    padding: 0 15px 0 15px;
+}
+.th-diasLetivos{
+    white-space: nowrap;
+    padding: 0 50px 0 50px;
+}
+#table-titulos{
+    width: 1670px;
+}
+#div-titulo{
+    padding-bottom: 40px;
+}
+#div-titulo input{
+    font-weight: 600;
+    width: 100%;
+}
+#table-daysWeek{
+    font-size: 18px;
+}
+#table-daysWeek  td{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#table-daysWeek  th{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.div-a{
+    padding-left: 55px;
+}
+.div-a input{
+    display: inline-block;
+    vertical-align: middle;
+
+    float:left;
+    width: 150px;
+}
+.div-a select{
+    width: 300px;
+}
+.div-b{
+    padding-top: 20px;
+    padding-left: 55px;
+}
+.div-c{
+    padding-top: 50px;
+    padding-left: 55px;
+}
+#div-legendaFeriados{
+    padding-bottom: 10px;
+    padding-left: 200px;
+}
+.div-b-a{
+    padding-top: 40px;
+}
+.container-fluid{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+

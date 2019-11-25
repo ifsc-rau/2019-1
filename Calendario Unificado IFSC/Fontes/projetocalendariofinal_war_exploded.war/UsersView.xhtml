@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/UsersView.css"/>
+
+</h:head>
+<ui:decorate template="#{UserOnline.template()}">
+    <ui:define name="centro">
+        <div class="container-fluid">
+        <div class="table-responsive-lg">
+
+        <h:form id="formUsers"
+                    prependId="false">
+                <h:dataTable id="usersDT"
+                             class="table table-striped table-hover"
+                             value="#{UserView.users}"
+                             var="User"
+                             toggleable="true"
+                             rendered="#{not empty UserView.users}">
+                    <h:column scoped="row">
+                        <f:facet scoped="col" name="header">
+                            Nome
+                        </f:facet>
+                        <h:outputText value="#{User.name}"/>
+                    </h:column>
+                    <h:column scoped="row">
+                        <f:facet scoped="col" name="header">
+                            Email
+                        </f:facet>
+                        <h:outputText  value="#{User.email}"/>
+                    </h:column>
+                    <h:column scoped="row">
+                        <f:facet scoped="col" name="header">
+                            Campus
+                        </f:facet>
+                        <h:outputText  value="#{User.campus.nome}"/>
+                    </h:column>
+                    <h:column scoped="row">
+                        <f:facet scoped="col" name="header">
+                            Editar
+                        </f:facet>
+
+                        <a href="#" class="btn btn-warning btnEditUser" action="#{UserView.a(User)}">
+                            <h:graphicImage value="resources/img/edit.svg"/>
+                        </a>
+                    </h:column>
+                    <h:column scoped="row">
+                        <f:facet scoped="col" name="header">
+                            Excluir
+                        </f:facet>
+                        <h:commandLink class="btn btn-danger">
+                            <f:ajax listener="#{UserView.deleteUser(User)}"
+                                    execute="@form"
+                                    render="@form"
+                                    event="click"
+                            />
+                            <h:graphicImage value="resources/img/delete.svg"/>
+                        </h:commandLink>
+                    </h:column>
+
+                </h:dataTable>
+                <div>
+                    <h:outputLabel styleClass="empty" value="Nenhum outro usuário foi cadastrado." escape="false"
+                                   rendered="#{empty UserView.users}"/>
+                </div>
+            </h:form>
+        </div>
+        </div>
+
+        <div class="modal" id="modal-alerta">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar campus ou tipo de usuário</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- Corpo do Modal -->
+                    <div class="modal-body">
+                        <div class="container">
+                            <h:form prependId="false"
+                                    id="formEditUser">
+                            <table>
+
+                                <tr>
+                                    <td class="modalDataBasic"
+                                        style="padding: 5px 1px -5px 3px">
+                                        <div class="mb-3" style="float: left;
+                                                                font-size: 18px">
+                                           <h:outputLabel value="Nome:"
+                                                          class="labelModalDataBasic"/>
+                                            <h:outputLabel value="#{UserView.userAux.name}" />
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="mb-3" style="font-size: 18px; float: left">
+                                            <h:outputLabel value="Email: "
+                                                           class="labelModalDataBasic"/>
+                                            <h:outputLabel value="#{UserView.userAux.email}"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                                <div class="mb-3" style="height: 45px;">
+                                    <h:outputLabel value="Campus disponíveis"
+                                                   for="campus"
+                                                   class="labelModalDataBasic"/>
+                                    <h:selectOneMenu class="btn btn-success dropdown-toggle form-control"
+                                                     converter="CampusConverter"
+                                                     id="campus"
+                                                     value="#{UserView.userAux.campus}">
+                                        <f:selectItem itemLabel="#{UserView.userAux.campus}"
+                                                      itemValue=""
+                                                      noSelectionOption="true"/>
+                                        <f:selectItems value="#{UserView.campus}"
+                                                       var="campus"
+                                                       itemValue="#{campus}"
+                                                       converter="CampusConverter"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <br/>
+                                <div class="mb-3" style="height: 60px">
+                                    <h:outputLabel value="Tipo de usuário:"
+                                                   for="typeUser"
+                                                   class="labelModalDataBasic"/>
+                                    <h:selectOneMenu value="#{UserView.userAux.user_type}"
+                                                     id="typeUser"
+                                                     class="btn btn-success dropdown-toggle form-control">
+                                        <f:selectItem itemLabel="Selecione o tipo de usuário"
+                                                      itemValue="#{UserView.userAux.user_type}"
+                                                      />
+                                        <f:selectItem itemLabel="Usuário comum"
+                                                      var="tipoUsuario"
+                                                      itemValue="false"/>
+                                        <f:selectItem itemLabel="Usuário reitoria"
+                                                      var="tipoUsuario"
+                                                      itemValue="true"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="modal-footer">
+                                    <h:commandButton class="btn btn-primary"
+                                                     value="Alterar"
+                                                     id="btn-confirm"
+                                                     action="#{UserView.editUser(UserView.userAux)}"/>
+                                </div>
+                            </h:form>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <h:outputScript name="jquery-3.3.1.min.js" library="js"/>
+        <h:outputScript name="popper.min.js" library="js"/>
+        <h:outputScript name="bootstrap.min.js" library="js"/>
+       <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous" type=""></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous" type=""></script>-->
+        <h:outputScript name="UserView.js" library="js"/>
+    </ui:define>
+</ui:decorate>
+</html>

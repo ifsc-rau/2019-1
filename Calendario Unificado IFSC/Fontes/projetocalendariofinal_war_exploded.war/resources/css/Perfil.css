@@ -1,0 +1,146 @@
+
+.container table{
+    max-width: 1300px;
+    width: 100%;
+}
+.container form input{
+    height: 45px;
+}
+#campus, #typeUser{
+    height: 45px;
+}
+.container label{
+
+}
+.container .data-basic{
+    padding: 15px;
+    border: 1px solid #dedfe0;
+}
+.container label{
+    float: left;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    padding: 2px;
+
+}
+.container .label-titles, #currentCampus, #currentTypeUser{
+    font-size: 20px;
+    font-weight: 300;
+    display: block;
+    color: #333333;
+    float: left;
+    text-transform: none;
+    padding-top: 10px;
+}
+.container .border-bottom{
+    padding-top: 10px;
+    border-bottom: 1px solid #dedfe0;
+}
+.about-account{
+    padding: 15px;
+    border-bottom: 1px solid #dedfe0;
+}
+.input-password{
+    text-align: left;
+    max-width: 550px;
+}
+.container #passwords input{
+    display: inline-block;
+    vertical-align: middle;
+
+}
+#btn-register{
+    margin-top: 20px;
+    max-width: 250px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.type-border-user{
+    border-top: none!important
+}
+input::placeholder{
+    color: black;
+}
+#infoPassword{
+    font-size: 80%;
+    text-transform: none;
+    float: left;
+}
+#infoEmail{
+    font-size: 80%;
+    color: #dc3545;
+    text-transform: none;
+    float: left;
+}
+.colorSucess{
+    color: #1e7e34;
+}
+.colorError{
+    color: #bd2130;
+}
+.divInfoPassword{
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 550px;
+    width: 100%;
+}
+#btn-confirm{
+    max-width: 150px;
+    width: 100%;
+}
+.menssageError{
+    background-color: rgb(220, 53, 69);
+    color: white;
+}
+.menssageAlert{
+    background-color: #ffc34d;
+    color: black;
+}
+.alert{
+    padding: 20px 70px 20px 10px;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    max-height: 100px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: left;
+
+
+}
+.alertSucess{
+    background-color: rgb(40, 167, 69);
+    color: white;
+}
+.error-enter{
+    animation: move-enter 500ms;
+}
+.error-hide{
+    animation:move-hide-exit 500ms;
+}
+
+#divInfoEmail{
+    width: 100%;
+}
+
+@keyframes move-enter {
+    from{
+        opacity: 0;
+        transform: translateX(35%);
+    }to{
+         opacity: 1;
+         transform: translateY(0%);
+     }
+}
+@keyframes move-hide-exit {
+    from{
+        opacity: 1;
+        transform: translateY(0%);
+    }to{
+         opacity: 0;
+         transform: translateX(35%);
+     }
+}
+

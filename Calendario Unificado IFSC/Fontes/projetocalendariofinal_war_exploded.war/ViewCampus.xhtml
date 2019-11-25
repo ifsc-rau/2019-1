@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/calendario.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/MyCalendars.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/ViewCampus.css"/>
+    <style>
+        .modal input{
+            width: 100%;
+        }
+        .labelModal{
+            float: left;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .modal input[type=submit]{
+            margin: 5px;
+            max-width: 150px;
+            float: left;
+            font-weight: 800;
+        }
+
+    </style>
+</h:head>
+<ui:decorate template="#{UserOnline.template()}">
+<ui:define name="centro">
+    <div class="container-fluid">
+
+        <div class="table-responsive-lg">
+        <h:form class="formsDT">
+            <h:dataTable id="DT"
+                        class="table table-striped"
+                        value="#{CampusController.campus}"
+                        var="Campus"
+                        toggleable="true"
+                        rendered="#{not empty CampusController.campus}">
+                <h:column scoped="col">
+                    <f:facet name="header">
+                        Nome
+                    </f:facet>
+                    <h:outputLabel value="#{Campus.nome}"/>
+                </h:column>
+                <h:column scoped="col">
+                    <f:facet name="header">
+                       Cidade
+                    </f:facet>
+                    <h:outputLabel value="#{Campus.cidade}"/>
+                </h:column>
+                <h:column scoped="col">
+                    <f:facet name="header">
+                        Utilização
+                    </f:facet>
+                    <h:outputLabel value="Não está sendo utilizado"
+                                    rendered="#{!Campus.utilizacao}"/>
+                    <h:outputLabel value="Está sendo utilizado"
+                                   rendered="#{Campus.utilizacao}"/>
+                </h:column>
+                <h:column scoped="col">
+                    <f:facet name="header">
+                        Editar
+                    </f:facet>
+                    <h:commandLink class="btn btn-warning"
+                                    id="btnEditCampus"
+                                    action="#{CampusController.editCampus(Campus)}"
+                    >
+                        <h:graphicImage value="resources/img/edit.svg"/>
+                    </h:commandLink>
+                </h:column>
+                <h:column scoped="col">
+                    <f:facet name="header">
+                        Excluir
+                    </f:facet>
+                    <h:commandLink class="btn btn-danger"
+                        id="btnDeleteCampus"
+                        disabled="#{Campus.utilizacao}">
+                        <f:ajax listener="#{CampusController.deleteCampus(Campus)}"
+                                execute="@form"
+                                render="@form"
+                                event="click"
+                        />
+                        <h:graphicImage value="resources/img/delete.svg"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <h:outputText styleClass="empty" value="Nenhum campus cadastrado." escape="false" rendered="#{empty CampusController.campus}"/>
+        </h:form>
+        </div>
+    </div>
+
+    <h:outputScript name="jquery-3.3.1.min.js" library="js"/>
+    <h:outputScript name="popper.min.js" library="js"/>
+    <h:outputScript name="bootstrap.min.js" library="js"/>
+    <h:outputScript name="Alerts.js" library="js"/>
+</ui:define>
+</ui:decorate>
+</html>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/calendario.css"/>
+</h:head>
+<ui:decorate template="#{UserOnline.template()}">
+<ui:define name="centro">
+    <div class="errors" style="margin-top: 90px;
+                                    margin-right: 15px;
+                                    position: absolute;
+                                    top: 15px;
+                                    right: 0;
+                                    z-index: 2">
+    </div>
+    <div class="container-fluid">
+
+        <div class="div-a row">
+            <div class="col">
+                <select id="select_colors" class="btn btn-success dropdown-toggle form-control">
+                    <option value="choose">
+                        Escolha o tipo de data
+                    </option>
+                    <option value="0">
+                        Data de início do semestre letivo e data limite de término do semestre letivo
+                    </option>
+                    <option value="1">
+                        Atividades pedagógicas e administrativas, sem atividades acadêmicas
+                    </option>
+                    <option value="2">
+                        Férias docentes
+                    </option>
+                    <option value="3">
+                        Pontos facultativos
+                    </option>
+                    <option value="9">
+                        Feriados Municipais/Nacionais
+                    </option>
+                    <option value="4">
+                        Recesso (com reposição de acordo com necessidade institucional)
+                    </option>
+                    <option value="5">
+                        Ponto facultativo até as 14h
+                    </option>
+                    <option value="6">
+                        Solenidades de colação de grau e formatura – data prevista
+                    </option>
+                    <option value="7">
+                        Dia letivo
+                    </option>
+                    <option value="8">
+                        Fim de semana
+                    </option>
+                </select>
+            </div>
+            <div class="col">
+                <h:commandButton id="btnSalvar"
+                                 value="Salvar"
+                                 class="btn btn-lg btn-success btn-block"/>
+            </div>
+        </div>
+
+        <div class="div-b">
+            <div class="row">
+                <h:form>
+                    <div id="div-titulo" class="col order-2"></div>
+                </h:form>
+            </div>
+            <div id="div-calendario"></div>
+            <div class="div-b-a"></div>
+        </div>
+        <div class="div-c">
+            <div class="row">
+                <div class="col ">
+                    <div id="div-legendas"></div>
+                </div>
+                <div class="col order-12">
+                    <div id="div-legendaFeriados"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h:outputScript library="js"
+                    name="jquery-3.3.1.min.js"
+    />
+    <h:outputScript library="js"
+                    name="Alerts.js"
+    />
+
+    <h:outputScript library="js"
+                    name="Data.js"
+    />
+    <h:outputScript library="js"
+                    name="Calendar.js"
+
+    />
+    <h:outputScript name="EditCalendarCampus.js" library="js"/>
+   
+</ui:define>
+</ui:decorate>
+</html>

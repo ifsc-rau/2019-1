@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/calendario.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/MyCalendars.css"/>
+</h:head>
+<ui:decorate template="#{UserOnline.template()}">
+    <ui:define name="centro">
+        <div class="container-fluid">
+        <div class="table-responsive-lg">
+
+        <h:form id="formsCalendars">
+                <h:dataTable id="calendarsDT"
+                             class="table table-striped"
+                             value="#{ReleasedCalendarsController.calendars}"
+                             rendered="#{not empty ReleasedCalendarsController.calendars}"
+                             var="Calendar"
+                             toggleable="true" >
+                    <h:column>
+                        <f:facet name="header">
+                            Ano
+                        </f:facet>
+                        <h:outputText  value="#{Calendar.ano}"/>
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">
+                            Usuário
+                        </f:facet>
+                        <h:outputText value="#{Calendar.user.name}"/>
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">
+                            Campus
+                        </f:facet>
+                        <h:outputText value="#{Calendar.user.campus.nome}"/>
+                    </h:column>
+                    <h:column >
+                        <f:facet name="header">
+                            Visualizar
+                        </f:facet>
+                        <h:commandLink class="btn btn-info"
+                                       action="#{ReleasedCalendarsController.viewCalendar(ReleasedCalendarsController.selectedCalendar)}">
+                            <f:setPropertyActionListener value="#{Calendar}"
+                                                         target="#{ReleasedCalendarsController.selectedCalendar}"/>
+                            <h:graphicImage value="resources/img/visibility.svg"/>
+
+                        </h:commandLink>
+                    </h:column>
+                    <h:column rendered="#{UserOnline.user.user_type}" >
+                        <f:facet name="header">
+                            Remover
+                        </f:facet>
+                        <h:commandLink class="btn btn-danger"
+                                       action="#{ReleasedCalendarsController.toRemoveReleased(ReleasedCalendarsController.selectedCalendar)}">
+                            <f:setPropertyActionListener value="#{Calendar}"
+                                                         target="#{ReleasedCalendarsController.selectedCalendar}"/>
+                            <h:graphicImage value="resources/img/remove.svg"/>
+                            <f:ajax execute="@form" render="@form :calendarsDT" />
+
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+                    <h:outputText styleClass="empty" value="Nenhum calendário foi liberado ainda." escape="false" rendered="#{empty ReleasedCalendarsController.calendars}"/>
+            </h:form>
+        </div>
+        </div>
+        <h:outputScript name="jquery-3.3.1.min.js" library="js"/>
+    </ui:define>
+</ui:decorate>
+</html>

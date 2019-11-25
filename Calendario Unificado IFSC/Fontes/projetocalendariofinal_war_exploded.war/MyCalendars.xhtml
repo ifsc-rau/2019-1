@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/calendario.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/MyCalendars.css"/>
+</h:head>
+<ui:decorate template="#{UserOnline.template()}">
+<ui:define name="centro">
+    <div class="container-fluid">
+    <div class="table-responsive-lg">
+
+    <h:form id="formsCalendars">
+            <h:dataTable id="calendarsDT"
+                        class="table table-striped"
+                        value="#{MyCalendarsController.calendars}"
+                        var="Calendar"
+                        toggleable="true"
+                        rendered="#{not empty MyCalendarsController.calendars}">
+                <h:column>
+                    <f:facet name="header">
+                        Ano
+                    </f:facet>
+                    <h:outputText  value="#{Calendar.ano}" />
+                </h:column>
+                <h:column >
+                    <f:facet name="header">
+                        Usuário
+                    </f:facet>
+                    <h:outputText value="#{Calendar.user.name}"/>
+                </h:column>
+                <h:column >
+                    <f:facet name="header">
+                        Campus
+                    </f:facet>
+                    <h:outputText value="#{Calendar.user.campus.nome}"/>
+                </h:column>
+                <h:column >
+                    <f:facet name="header">
+                        Editar
+                    </f:facet>
+                    <h:commandLink class="btn btn-warning"
+                                action="#{MyCalendarsController.editCalendar(MyCalendarsController.selectedCalendar)}"
+                                disabled="#{Calendar.sent || Calendar.liberar}">
+                        <f:setPropertyActionListener value="#{Calendar}"
+                                                target="#{MyCalendarsController.selectedCalendar}"/>
+                        <h:graphicImage value="resources/img/edit.svg" rendered="#{not Calendar.sent || not Calendar.liberar}"/>
+                    </h:commandLink>
+                </h:column>
+                <h:column >
+                    <f:facet name="header">
+                        Visualizar
+                    </f:facet>
+                    <h:commandLink class="btn btn-info"
+                                   action="#{MyCalendarsController.viewCalendar(MyCalendarsController.selectedCalendar)}">
+                        <f:setPropertyActionListener value="#{Calendar}"
+                                                     target="#{MyCalendarsController.selectedCalendar}"/>
+                        <h:graphicImage value="resources/img/visibility.svg"/>
+
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Excluir
+                    </f:facet>
+                    <h:commandLink class="btn btn-danger"
+                                   disabled="#{Calendar.sent || Calendar.liberar}">
+                        <h:graphicImage value="resources/img/delete.svg"/>
+                        <f:ajax listener="#{MyCalendarsController.deleteCalendar(Calendar)}"
+                                execute="@form"
+                                render="@form"
+                                event="click"
+                        />
+
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        #{UserOnline.user.user_type ? 'Liberar' : 'Liberado'}
+                    </f:facet>
+                    <h:commandLink class="btn btn-success"
+                                   rendered="#{!Calendar.liberar and UserOnline.user.user_type}" >
+                        <h:graphicImage value="resources/img/release.svg"/>
+                        <f:ajax listener="#{MyCalendarsController.calendarRelease(Calendar)}"
+                                execute="@form"
+                                render="@form"
+                                event="click"
+                        />
+                    </h:commandLink>
+
+                    <h:outputLabel value="Já liberado :)"
+                                   rendered="#{Calendar.liberar}"
+                    />
+                    <h:outputLabel value="Não enviado"
+                                   rendered="#{not Calendar.sent and not UserOnline.user.user_type}"
+                    />
+                    <h:outputLabel value="Em análise..."
+                                   rendered="#{Calendar.sent and not Calendar.liberar and not UserOnline.user.user_type}"
+                    />
+                </h:column>
+                <h:column rendered="#{not UserOnline.user.user_type}">
+                    <f:facet name="header">
+                        Enviar
+                    </f:facet>
+                    <h:commandLink class="btn btn-success"
+                                   rendered="#{!Calendar.sent}">
+
+                        <f:ajax listener="#{MyCalendarsController.calendarSubmit(Calendar)}"
+                                execute="@form"
+                                render="@form"
+                                event="click"
+                        />
+                        <h:graphicImage value="resources/img/release.svg"/>
+                    </h:commandLink>
+                    <h:outputLabel value="Já enviado :)" rendered="#{Calendar.sent}"/>
+                </h:column>
+
+            </h:dataTable>
+            <div>
+                <h:outputText styleClass="empty" value="Poxa! Sua lista de calendários está vazia :(" escape="false" rendered="#{empty MyCalendarsController.calendars}"/>
+            </div>
+        </h:form>
+    </div>
+    </div>
+    <h:outputScript name="jquery-3.3.1.min.js" library="js"/>
+</ui:define>
+</ui:decorate>
+</html>

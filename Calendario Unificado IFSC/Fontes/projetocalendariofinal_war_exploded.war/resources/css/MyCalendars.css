@@ -1,0 +1,40 @@
+#formsCalendars form{
+    padding: 50px 10px 10px 5px;
+}
+
+#formsCalendars table,tbody, td, tr, th{
+    border: 0;
+}
+#formsCalendars button{
+    width: 100px;
+    height: 65px;
+}
+table{
+    border-radius: 80px;
+}
+#formsCalendars img{
+    width: 40px;
+}
+#formsCalendars table td{
+    font-weight: bolder;
+}
+#formsCalendars table{
+    width: 100%;
+    text-align: center;
+}
+#formsCalendars thead th{
+    background: rgb(40, 167, 69);
+    font-weight: bolder;
+    font-size: 26px;
+}
+#formsCalendars tbody td{
+    font-size: 24px;
+}
+.container-fluid{
+    padding-top: 50px;
+}
+
+.empty{
+    font-size: 30px;
+    color: black;
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+>
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/Menu.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="./resources/css/Alerts.css"/>
+
+    <title>Calendário unificado</title>
+</head>
+<h:body class="text-center" rendered="#{MenuController.userOnline.user.user_type}">
+    <div class="menu-container">
+        <ul class="menu clearfix">
+            <li><a href="menuPrincipal.xhtml"><img src="resources/img/home.svg" alt="home"/> Início</a></li>
+            <li><a href="#"><img src="resources/img/date_range.svg" alt="calendario"/> Calendário</a>
+                <ul class="sub-menu clearfix">
+                    <li><a href="./criarCalendario.xhtml"> Criar</a></li>
+                    <li><a href="#">Visualizar</a>
+                        <ul class="sub-menu">
+                            <li><a href="./MyCalendars.xhtml">Meus</a></li>
+                            <li><a href="./ReleasedCalendars.xhtml">Liberados</a></li>
+                            <li><a href="./AllCalendars.xhtml">Enviados</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#"><img src="resources/img/faces.svg" alt="usuarios"/> Usuários</a>
+                <ul class="sub-menu clearfix">
+                    <li><a href="./UsersView.xhtml"> Visualizar</a></li>
+                    <li><a href="./Register.xhtml"> Adicionar</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><img src="resources/img/home_work.svg" alt="campus"/> Campus</a>
+                <ul class="sub-menu clearfix">
+                    <li><a href="./ViewCampus.xhtml"> Visualizar</a></li>
+                    <li><a href="./Campus.xhtml"> Adicionar</a></li>
+                </ul>
+            </li>
+            <li class="li-user-online"
+                style="float: right;">
+                <a style="text-transform: none;"
+                   href="Perfil.xhtml"
+                >
+                    #{MenuController.userOnline.user.email}</a>
+            </li>
+            <li>
+                <a  href="#" onclick="logout()">
+                    <img
+                        src="resources/img/logout.svg"
+                        alt="logout"
+                     />
+                    Sair
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <ui:insert name="centro">
+        <ui:define name="centro">
+        </ui:define>
+    </ui:insert>
+
+</h:body>
+
+<h:outputScript library="js"
+                name="jquery-3.3.1.min.js"/>
+
+<h:outputScript library="js"
+                name="Menu.js"/>
+
+</html>

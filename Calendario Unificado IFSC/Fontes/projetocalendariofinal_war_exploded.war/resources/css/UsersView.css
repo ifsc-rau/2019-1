@@ -1,0 +1,78 @@
+#formUsers{
+    padding: 0px 10px 10px 5px;
+}
+
+#formUsers table,tbody, td, tr, th{
+    border: 0;
+}
+#formUsers button{
+    width: 100px;
+    height: 65px;
+}
+table{
+    border-radius: 80px;
+}
+#formUsers img{
+    width: 40px;
+}
+#formUsers table td{
+    font-weight: bolder;
+}
+#formUsers table{
+    width: 100%;
+    text-align: center;
+}
+#formUsers thead th{
+    background: rgb(40, 167, 69);
+    font-weight: bolder;
+    font-size: 26px;
+}
+#formUsers tbody td{
+    font-size: 24px;
+}
+.container-fluid{
+    padding-top: 50px;
+}
+.container-fluid label{
+    font-size: 30px;
+    color: black;
+}
+
+.labelModalDataBasic{
+    font-weight: 600;
+    color: black;
+    padding-right: 5px;
+    float: left;
+}
+#formEditUser table {
+    width: 100%;
+
+}
+body select{
+    height: 45px;
+    width: 100%;
+}
+.headerDataUser{
+    font-size: 25px;
+    font-weight: 300;
+    float: left;
+    border-bottom: 1px solid #dedfe0;
+    width: 100%;
+}
+
+#btn-confirm {
+    border: 0;
+    border-radius: 2px;
+    width: 100%;
+    height: 42px;
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #f05a5b;
+    color: #fff;
+    cursor: pointer;
+}
+
+#btn-confirm:hover{
+    background: #e14f50;
+}
