@@ -1,0 +1,47 @@
+﻿
+    -   SiteMonitora: 
+        x   Ativar o scrapper de acordo com o tempo_notificacao 
+            definido pelo usuario:
+            -   Definir o BackgroundSchedulller como variavel global no produtos.view;
+            -   Adicionar id a cada sheduler.job criado;
+            -   Tranferir função de deletar produtos para produtos.view;            
+            -   Excluir scheduler.job(job_id) quando um produto for excluído;
+        
+        -   Enviar email para o usuário caso haja um abaixo do preço do produto:
+            -   https://medium.com/@_christopher/how-to-send-emails-with-python-django-through-google-smtp-server-for-free-22ea6ea0fb8e
+
+        !-   Adcionar notificação ao usuário quando o preço do produto abaixar:
+            x   Criar dropdown de notificações na navbar;
+            x   Ao verificar que o preço abaixou, adicionar notificação;  
+            -   set_coockie(notifications) para carregalas a navbar; 
+
+        !x   Exibir detalhes do produto com o historico de preços;
+
+        x   Definir requirements.txt:
+            APScheduler==3.6.3
+            beautifulsoup4==4.8.1
+            requests==2.22.0
+            Django==2.2.4
+            mysqlclient==1.4.2
+            
+
+        x   Consertar buscador de preços (ainda tem o que melhorar)
+            
+
+        -   Telas:
+            -   Tela dos produtos:
+                -   Adicionar botão para direcionar para o formulário de inclusão
+                x   Consertar botões de adicionar/deletar protudos nos cards    
+                    (se o produto ja estiver cadastrado para o user botão de deletar, 
+                    se não, botão de adicionar) -- somente na tela do usuario
+
+            -   Tela do perfil:
+                x   Tela dos produtos (mudar a tabela paras os cards);
+                -   Adicionar mais informações aos dados pessoais;
+                x   AJAX para deletar os produtos;
+
+            !-   Tela Index:
+                -   App demo de pesquisa de produto (sem salvar no bd?);
+
+
+    
