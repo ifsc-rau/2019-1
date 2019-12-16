@@ -65,21 +65,21 @@
 
                 <div class="mb-3">
                     <h:selectOneMenu class="btn btn-success dropdown-toggle form-control"
-                                     value="#{cadastroController.userControlller.campus}"
+                                     value="#{CampusController.campus}"
                                      converter="CampusConverter"
                                      required="true"
                                      id="campus">
                         <f:selectItem itemLabel="Campus"
                                       itemValue=""
                                       noSelectionOption="true"/>
-                        <f:selectItems value="#{cadastroController.listaCampus}"
+                        <f:selectItems value="#{CampusController.campusNotUtils}"
                                        var="campus"
                                        itemValue="#{campus}"
                                        converter="CampusConverter"/>
                     </h:selectOneMenu>
                 </div>
                 <div class="mb-3">
-                    <h:selectOneMenu value="#{cadastroController.tipo_usuario}"
+                    <h:selectOneMenu value="#{true || false}"
                                      id="typeUser"
                                      class="btn btn-success dropdown-toggle form-control"
                                      required="true">

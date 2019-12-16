@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="jfoenix-8.0.5.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/jfoenix-8.0.5.jar!/"/>
+	</lib>
+	<levels>
+		<level name="jfoenix-8.0.5" value="project"/>
+	</levels>
+</component>

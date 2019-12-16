@@ -274,6 +274,87 @@ function selectionDay(dia, mes, ano) {
                     '<th style="padding-right: 10px;">' + dateAux + '/' + returnMonthAbbreviation(retornarIdData(id).getMonth()) + '</th>' +
                     '<th class="texto-legenda"><input id="input' + id + '" type="text" style="font-weight: bold; color: #212529" /></th>' +
                     '</tr>');
+
+                const lastDayYear = new Date(ano + 1, 0, 1);
+                let days = [];
+                for (let dia = new Date(ano, 0, 1); dia <= lastDayYear; dia.setDate(dia.getDate() + 1)) {
+                    if(dia.getFullYear() === ano) {
+                        let id = returnId(dia);
+                        if ($('#' + id).css('background-color') === 'rgb(255, 0, 0)') {
+                            let dad = $('#tdLegendsHolidays' + id);
+
+                            if (dad !== undefined) {
+                                let last = dad.children().last();
+                                last = last.children().first();
+                                console.log(dia)
+                                days.push({
+                                    "date": retornarIdData(id),
+                                    "description": last.val()
+                                })
+                            }
+                        }
+                    }
+
+                }
+                $('#tableLegendaFeriados tr').remove();
+                $('#tableLegendaFeriados').append('<tr><th id="headerLegendaFeriados" colspan="2">FERIADOS - ' + ano + '</th></tr>');
+
+                for (var i = 0; i < days.length; i++) {
+                    let {date, description} = days[i];
+                    let identity = returnId(date);
+                    var month = date.getMonth();
+                    var day = date.getDate();
+                    if (day < 10) {
+                        day = '0' + day;
+                    }
+
+                    switch (month) {
+                        case 0:
+                            month = 'Jan';
+                            break;
+                        case 1:
+                            month = 'Fev';
+                            break;
+                        case 2:
+                            month = 'Mar';
+                            break;
+                        case 3:
+                            month = 'Abr';
+                            break;
+                        case 4:
+                            month = 'Mai';
+                            break;
+                        case 5:
+                            month = 'Jun';
+                            break;
+                        case 6:
+                            month = 'Jul';
+                            break;
+                        case 7:
+                            month = 'Ago';
+                            break;
+                        case 8:
+                            month = 'Set';
+                            break;
+                        case 9:
+                            month = 'Out';
+                            break;
+                        case 10:
+                            month = 'Nov';
+                            break;
+                        case 11:
+                            month = 'Dez';
+                            break;
+                    }
+                    day = day + '/' + month;
+                    $('#tableLegendaFeriados').append('<tr id="tdLegendsHolidays' + identity + '" >' +
+                        '<th style="padding-right: 10px; width: 20px;  ">' + day + '</th>' +
+                        '<th class="texto-legenda"><input id="input' + identity + '" type="text" style="font-weight: bold; color: #212529" /></th>' +
+                        '</tr>');
+
+                    $('#input' + identity).val(description)
+                }
+
                 holidaysCity.push(id);
                 $('#input' + id + '').focus();
             }
@@ -717,8 +798,7 @@ $(document).ready(async function () {
         arrayObjectData = [];
         var i = 0;
         for (var dia = new Date(ano, 0, 1); dia <= hoje; dia.setDate(dia.getDate() + 1), i++) {
-            for (var j = 0; j < yearsOfMonth.length; j++) {
-                if (yearsOfMonth[dia.getMonth()] === yearsOfMonth[j]) {
+                if (dia.getFullYear() == ano) {
                     if (dia.getFullYear() == ano) {
                         let id = returnId(dia);
                         let backgroundColor = $('#' + id).css('background-color');
@@ -739,7 +819,7 @@ $(document).ready(async function () {
                         } else if (backgroundColor === 'rgb(255, 0, 0)') {
                             let dad = $('#tdLegendsHolidays' + id);
 
-                            if (dad !== undefined) {
+                            if (dad.attr('id') !== undefined) {
                                 let last = dad.children().last();
 
                                 last = last.children().first();
@@ -781,7 +861,6 @@ $(document).ready(async function () {
                     }
                 }
             }
-        }
         if (firstHalfTotal >= 100 && secondHalfTotal >= 100) {
 
             let calendar = new Calendario(null, ano, titulo, subtitulo, null, null, null, null, arrayObjectData);

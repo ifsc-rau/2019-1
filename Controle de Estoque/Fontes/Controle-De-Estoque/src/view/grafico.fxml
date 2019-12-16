@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMenu">
+   <children>
+      <ImageView fitHeight="453.0" fitWidth="718.0" layoutY="-7.0">
+         <image>
+            <Image url="@../img/Menu.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="265.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="GRAFICO" textAlignment="CENTER" wrappingWidth="187.99998891353607" />
+      <BarChart fx:id="barChart" layoutX="75.0" layoutY="57.0" prefHeight="366.0" prefWidth="569.0" title="Vendas por Mês">
+         <xAxis>
+            <CategoryAxis fx:id="categoryAxis" side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis fx:id="numberAxis" side="LEFT" />
+         </yAxis>
+      </BarChart>
+   </children>
+</AnchorPane>

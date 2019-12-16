@@ -56,8 +56,8 @@ def entrar(request):
                 #    addNotificacao(p)
                 #notif = Notificacao.objects.all().filter(user=request.user)
 
-                context = {'user': user_aux, 'usuario': usuario, 'notif': notif}
-                return render(request, 'usuario.html', context)
+                context = {'user': user_aux, 'usuario': usuario}
+                return redirect('/painel/detalhes')
             else:
                 messages.error(request, "Usuário ou senha inválidos")
         except User.DoesNotExist:

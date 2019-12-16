@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="ControleEstoque">
+    <output-path>$PROJECT_DIR$</output-path>
+    <root id="root">
+      <element id="archive" name="ControleEstoque.jar">
+        <element id="module-output" name="ControleEstoque" />
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/src/main/META-INF/MANIFEST.MF" />
+        </element>
+      </element>
+      <element id="library" level="module" name="mysql-connector-java-5.1.48.jar" module-name="ControleEstoque" />
+    </root>
+  </artifact>
+</component>

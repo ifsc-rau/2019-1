@@ -196,10 +196,6 @@ function selectionDay(dia, mes, ano) {
             $('#' + id).css('background-color', '#00b3b3');// Essa cor é para Férias docentes
             cor = '#00b3b3';
             break;
-        case 3:
-            $('#' + id).css('background-color', '#ff0000');// Essa cor é para Feriados e pontos facultativos
-            cor = '#ff0000';
-            break;
         case 4:
             $('#' + id).css('background-color', '#ff9933');// Essa cor é para Recesso (com reposição de acordo com necessidade institucional)
             cor = '#ff9933';
@@ -242,6 +238,87 @@ function selectionDay(dia, mes, ano) {
                     '<th style="padding-right: 10px;">' + dateAux + '/' + returnMonthAbbreviation(retornarIdData(id).getMonth()) + '</th>' +
                     '<th class="texto-legenda"><input id="input' + id + '" type="text" style="font-weight: bold; color: #212529" /></th>' +
                     '</tr>');
+
+                const lastDayYear = new Date(ano + 1, 0, 1);
+                let days = [];
+                for (let dia = new Date(ano, 0, 1); dia <= lastDayYear; dia.setDate(dia.getDate() + 1)) {
+                    if(dia.getFullYear() === ano) {
+                        let id = returnId(dia);
+                        if ($('#' + id).css('background-color') === 'rgb(255, 0, 0)') {
+                            let dad = $('#tdLegendsHolidays' + id);
+
+                            if (dad !== undefined) {
+                                let last = dad.children().last();
+                                last = last.children().first();
+                                console.log(dia)
+                                days.push({
+                                    "date": retornarIdData(id),
+                                    "description": last.val()
+                                })
+                            }
+                        }
+                    }
+
+                }
+                $('#tableLegendaFeriados tr').remove();
+                $('#tableLegendaFeriados').append('<tr><th id="headerLegendaFeriados" colspan="2">FERIADOS - ' + ano + '</th></tr>');
+
+                for (var i = 0; i < days.length; i++) {
+                    let {date, description} = days[i];
+                    let identity = returnId(date);
+                    var month = date.getMonth();
+                    var day = date.getDate();
+                    if (day < 10) {
+                        day = '0' + day;
+                    }
+
+                    switch (month) {
+                        case 0:
+                            month = 'Jan';
+                            break;
+                        case 1:
+                            month = 'Fev';
+                            break;
+                        case 2:
+                            month = 'Mar';
+                            break;
+                        case 3:
+                            month = 'Abr';
+                            break;
+                        case 4:
+                            month = 'Mai';
+                            break;
+                        case 5:
+                            month = 'Jun';
+                            break;
+                        case 6:
+                            month = 'Jul';
+                            break;
+                        case 7:
+                            month = 'Ago';
+                            break;
+                        case 8:
+                            month = 'Set';
+                            break;
+                        case 9:
+                            month = 'Out';
+                            break;
+                        case 10:
+                            month = 'Nov';
+                            break;
+                        case 11:
+                            month = 'Dez';
+                            break;
+                    }
+                    day = day + '/' + month;
+                    $('#tableLegendaFeriados').append('<tr id="tdLegendsHolidays' + identity + '" >' +
+                        '<th style="padding-right: 10px; width: 20px;  ">' + day + '</th>' +
+                        '<th class="texto-legenda"><input id="input' + identity + '" type="text" style="font-weight: bold; color: #212529" /></th>' +
+                        '</tr>');
+
+                    $('#input' + identity).val(description)
+                }
+
                 holidaysCity.push(id);
                 $('#input' + id + '').focus();
             }
@@ -495,6 +572,7 @@ $(document).ready(async function () {
             }
         }
 
+
         $('.div-b-a').append('<table id="table-daysWeek">' +
             '<tr><th rowspan="2">Dias <br/>Letivos/ Semana</th><th rowspan="1">1° Semestre</th>' +
             '<td>Seg.</td><td id="1FirstHalf"> 0 </td>' +
@@ -517,7 +595,7 @@ $(document).ready(async function () {
 
     }
 
-    function criarTitulos() {
+    async function criarTitulos() {
         $('#div-titulo').append('<table id="table-titulos"></table>');
         $('#table-titulos').append('<tr><td id="td-titulo"><input id="inputText-titulo" type="text" placeholder="Insira o titulo" maxlength="160" class="input-titulos"></td></tr>' +
             '<tr><td><input id="inputText-subtitulo" type="text" placeholder="Insira o subtítulo" class="input-titulos" maxlength="160"></td></tr>');
@@ -534,6 +612,82 @@ $(document).ready(async function () {
 
         $('#div-legendaFeriados').append('<table id="tableLegendaFeriados"></table>');
         $('#tableLegendaFeriados').append('<tr><th id="headerLegendaFeriados"colspan="2">FERIADOS - ' + ano + '</th></tr>');
+
+        const url = 'https://api.calendario.com.br/?json=true&ano=' + ano + '&token=bGVvbmFyZG9vcm9zYWExNkBnbWFpbC5jb20maGFzaD04MTk0ODQ1Nw';
+
+        let holidays = []
+        await $.ajax({
+            url,
+            type: 'GET',
+            dataType: 'json',
+
+            success: data => {
+                console.log(data)
+                holidays = data;
+            },
+            error: () => {
+                console.log('error')
+            }
+        })
+
+        for (var i = 0; i < holidays.length; i++) {
+            let {date, name, type_code} = holidays[i];
+            if (type_code === '4' || type_code === '1') {
+                let day = date.substring(0, 2);
+                let month = date.substring(3, 5);
+                let identity = returnId(new Date(ano, month - 1, day))
+
+                $('#' + identity).css('backgroundColor', 'red')
+
+
+                month = parseInt(month - 1)
+                switch (month) {
+                    case 0:
+                        month = 'Jan';
+                        break;
+                    case 1:
+                        month = 'Fev';
+                        break;
+                    case 2:
+                        month = 'Mar';
+                        break;
+                    case 3:
+                        month = 'Abr';
+                        break;
+                    case 4:
+                        month = 'Mai';
+                        break;
+                    case 5:
+                        month = 'Jun';
+                        break;
+                    case 6:
+                        month = 'Jul';
+                        break;
+                    case 7:
+                        month = 'Ago';
+                        break;
+                    case 8:
+                        month = 'Set';
+                        break;
+                    case 9:
+                        month = 'Out';
+                        break;
+                    case 10:
+                        month = 'Nov';
+                        break;
+                    case 11:
+                        month = 'Dez';
+                        break;
+                }
+                day = day + '/' + month;
+                $('#tableLegendaFeriados').append('<tr id="tdLegendsHolidays' + identity + '" >' +
+                    '<th style="padding-right: 10px; width: 20px;  ">' + day + '</th>' +
+                    '<th class="texto-legenda"><input id="input' + identity + '" type="text" style="font-weight: bold; color: #212529" /></th>' +
+                    '</tr>');
+
+                $('#input' + identity).val(name)
+            }
+        }
 
     }
 
@@ -562,76 +716,78 @@ $(document).ready(async function () {
         }
 
         for (var dia = new Date(ano, 0, 1); dia <= hoje; dia.setDate(dia.getDate() + 1)) {
-            for (var j = 0; j < mesesDoAno.length; j++) {
-                if (mesesDoAno[dia.getMonth()] === mesesDoAno[j]) {
-                    if (dia.getFullYear() === ano) {
-                        var id = returnId(dia);
-                        var backgroundColor = $('#' + id).css('background-color');
+            if (dia.getFullYear() === ano) {
+                var id = returnId(dia);
+                var backgroundColor = $('#' + id).css('background-color');
 
-                        let typeDate;
-                        let description;
-                        let date;
+                let typeDate;
+                let description;
+                let date;
 
-                        if (backgroundColor === 'rgb(0, 64, 128)') {
-                            typeDate = 'Data de início do semestre letivo e data limite de término do semestre letivo';
-                            description = 'Início e fim de semestre'
-                        } else if (backgroundColor === 'rgb(255, 102, 204)') {
-                            typeDate = 'Atividades pedagógicas e administrativas, sem atividades acadêmicas';
-                            description = 'Atividades pedagógicas';
-                        } else if (backgroundColor === 'rgb(0, 179, 179)') {
-                            typeDate = 'Férias docentes';
-                            typeDate = 'Férias docentes';
-                        } else if (backgroundColor === 'rgb(255, 0, 0)') {
-                            let dad = $('#tdLegendsHolidays' + id);
+                if (backgroundColor === 'rgb(0, 64, 128)') {
+                    typeDate = 'Data de início do semestre letivo e data limite de término do semestre letivo';
+                    description = 'Início e fim de semestre'
+                } else if (backgroundColor === 'rgb(255, 102, 204)') {
+                    typeDate = 'Atividades pedagógicas e administrativas, sem atividades acadêmicas';
+                    description = 'Atividades pedagógicas';
+                } else if (backgroundColor === 'rgb(0, 179, 179)') {
+                    typeDate = 'Férias docentes';
+                    typeDate = 'Férias docentes';
+                } else if (backgroundColor === 'rgb(255, 0, 0)') {
+                    let dad = $('#tdLegendsHolidays' + id);
 
-                            if (dad !== undefined) {
-                                let last = dad.children().last();
+                    console.log(dad.attr('id'))
+                    if (dad.attr('id') !== undefined) {
+                        let last = dad.children().last();
 
-                                last = last.children().first();
+                        last = last.children().first();
 
-                                if (last.val() === "") {
-                                    last.focus();
-                                    return messageError('Por favor, verifique os feriados')
-                                }
-
-                                typeDate = 'Feriados e pontos facultativos';
-                                description = last.val();
-                            } else {
-                                typeDate = 'Feriados e pontos facultativos';
-                                description = 'Ponto facultativo';
-                            }
-                        } else if (backgroundColor === 'rgb(255, 153, 51)') {
-                            typeDate = 'Recesso (com reposição de acordo com necessidade institucional)';
-                            description = 'Recesso';
-                        } else if (backgroundColor === 'rgb(204, 204, 0)') {
-                            typeDate = 'Ponto Facultativo até as 14h';
-                            description = '';
-                        } else if (backgroundColor === 'rgb(255, 255, 0)') {
-                            typeDate = 'Solenidades de colação de grau e formatura – data prevista';
-                            description = 'Data prevista';
-                        } else if (backgroundColor === 'rgba(0, 0, 0, 0)' || (backgroundColor === 'rgb(255, 255, 255)')) {
-                            typeDate = 'Dia letivo';
-                            description = 'Dia letivo';
-                        } else if (backgroundColor === 'rgb(194, 194, 163)') {
-                            typeDate = 'Fim de semana';
-                            description = 'Fim de semana';
+                        if (last.val() === "") {
+                            last.focus();
+                            return messageError('Por favor, verifique os feriados')
                         }
 
-                        date = configuraData(dia.getDate(), (dia.getMonth() + 1), dia.getFullYear());
-                        let Data = new DataController(null, date, typeDate, description, null);
-                        if(arrayObjectData.indexOf(Data) === -1) {
-                            arrayObjectData.push(Data);
-                        }
+                        console.log(dia)
+                        typeDate = 'Feriados e pontos facultativos';
+                        description = last.val();
+                    } else {
+
+                        typeDate = 'Feriados e pontos facultativos';
+                        description = 'Ponto facultativo';
                     }
+                } else if (backgroundColor === 'rgb(255, 153, 51)') {
+                    typeDate = 'Recesso (com reposição de acordo com necessidade institucional)';
+                    description = 'Recesso';
+                } else if (backgroundColor === 'rgb(204, 204, 0)') {
+                    typeDate = 'Ponto Facultativo até as 14h';
+                    description = '';
+                } else if (backgroundColor === 'rgb(255, 255, 0)') {
+                    typeDate = 'Solenidades de colação de grau e formatura – data prevista';
+                    description = 'Data prevista';
+                } else if (backgroundColor === 'rgba(0, 0, 0, 0)' || (backgroundColor === 'rgb(255, 255, 255)')) {
+                    typeDate = 'Dia letivo';
+                    description = 'Dia letivo';
+                } else if (backgroundColor === 'rgb(194, 194, 163)') {
+                    typeDate = 'Fim de semana';
+                    description = 'Fim de semana';
+                }
+
+
+                date = configuraData(dia.getDate(), (dia.getMonth() + 1), dia.getFullYear());
+                console.log(date, description)
+                let Data = new DataController(null, date, typeDate, description, null);
+                if (arrayObjectData.indexOf(Data) === -1) {
+                    arrayObjectData.push(Data);
                 }
             }
         }
         if (firstHalfTotal >= 100 && secondHalfTotal >= 100) {
-            let calendar = new Calendario(null, ano, titulo, subtitulo, null,null, null, null, arrayObjectData);
+            let calendar = new Calendario(null, ano, titulo, subtitulo, null, null, null, null, arrayObjectData);
+            console.log(calendar);
             let response = await Calendario.post(calendar);
 
-            if(response === 'true'){
-                menssagemSucess('Calendário criado com sucesso :)', 'MyCalendars.xhtml');
+            if (response === 'true') {
+                menssagemSucess('Calendário salvo com sucesso :)', 'MyCalendars.xhtml');
             }
         } else {
             return messageError('Ops, cada semestre precisa ter no mínimo 100(cem)<br/>' +

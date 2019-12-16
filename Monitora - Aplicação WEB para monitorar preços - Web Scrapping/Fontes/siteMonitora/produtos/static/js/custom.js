@@ -25,11 +25,8 @@ $(document).ready(function () {
                 success: function(response){
                     if (response.hasOwnProperty('Error')){
                         console.log("estiveaqui");
-                        $("#messages").append('<div class="alert alert-danger col"><button type="button" class="close" id="close">&times;</button><span data-feather="alert-circle" id="alert-icon"></span>' + response['Error'] + '</div>');
+                        $("#messages").append('<div class="alert alert-danger col"><button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button><span data-feather="alert-circle" id="alert-icon"></span>' + response['Error'] + '</div>');
                         feather.replace();
-                        $(".close").on('click', function() {
-                            $(".alert").fadeOut();
-                        });
                         $("#loading").hide();
                     } else {
                         console.log(response);
@@ -47,11 +44,8 @@ $(document).ready(function () {
                 } 
             });
         } else {
-            $("#messages").append('<div class="alert alert-danger col"><button type="button" class="close" id="close">&times;</button><span data-feather="alert-circle" id="alert-icon"></span>URL Inválida</div>')
+            $("#messages").append('<div class="alert alert-danger col"><button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button><span data-feather="alert-circle" id="alert-icon"></span>URL Inválida</div>')
             feather.replace();
-            $(".close").on('click', function() {
-                $(".alert").fadeOut();
-            });
             $("#loading").hide();
         
         }
@@ -60,7 +54,7 @@ $(document).ready(function () {
 
 
     // Adiciona produto através do botão no card
-    $(".adiciona_produto").click(function(){
+    $(".adiciona_produto").off('click').on('click', function(){
         var this_btn = $(this)
         var prod_id = $(this).attr('prod_id');
         console.log("estive aqui - id = " + prod_id);
@@ -90,7 +84,7 @@ $(document).ready(function () {
 
     /* PAINEL */
 
-    $(".delete_prod_btn").click(function(event){
+    $(".delete_prod_btn").click(function(){
         var prod_id = $(this).attr('prod_id');
         console.log(prod_id);
         $("#deleteProdModal").show();
@@ -99,7 +93,8 @@ $(document).ready(function () {
             $("#deleteProdModal").hide();
             $("#deleteProdModal").removeClass("show");
         });
-        $("#deleteBtn").off('click').on('click', function(){
+        $(".deleteBtn").off('click').on('click', function(){
+            
             $.ajax({
                 method: 'POST',
                 url: 'ajax/delete_prod/',
@@ -110,19 +105,14 @@ $(document).ready(function () {
                 async: 'true',
                 cache: 'false',
                 success: function(response){
+                    console.log("estive aqui");
                     console.log(response);
                     if(response.hasOwnProperty('error')){
-                        $("#messages").append('<div class="alert alert-painel alert-danger col"><button type="button" class="close" id="close">&times;</button><span data-feather="alert-circle" id="alert-icon"></span>' + response['error'] + '</div>');
+                        $("#messages").append('<div class="alert alert-painel alert-danger col"><button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button><span data-feather="alert-circle" id="alert-icon"></span>' + response['error'] + '</div>');
                         feather.replace();
-                        $(".close").on('click', function() {
-                            $(".alert").fadeOut();
-                        });
                     } else {
-                        $("#messages").append('<div class="alert alert-painel alert-success col"><button type="button" class="close" id="close">&times;</button><span data-feather="alert-circle" id="alert-icon"></span>' + response['success'] + '</div>');
+                        $("#messages").append('<div class="alert alert-painel alert-success col"><button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button><span data-feather="alert-circle" id="alert-icon"></span>' + response['success'] + '</div>');
                         $("div[id=" + prod_id + "]").remove();
-                        $(".close").on('click', function() {
-                            $(".alert").fadeOut();
-                        });
                     }
                     
                 },

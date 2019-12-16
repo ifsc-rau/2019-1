@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerMenu">
+   <children>
+      <ImageView fitHeight="453.0" fitWidth="718.0" layoutY="-7.0">
+         <image>
+            <Image url="@../img/Menu.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="66.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Cadastro de produtos" textAlignment="CENTER" wrappingWidth="137.99998891353607" />
+      <Text layoutX="495.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Cadastro de Fornecedor" textAlignment="CENTER" wrappingWidth="187.99998891353607" />
+      <ImageView fitHeight="108.0" fitWidth="138.0" layoutX="72.0" layoutY="26.0" onMouseClicked="#btnCliente">
+         <image>
+            <Image url="@../img/icon-cadastroClientes.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="47.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Cadastro de cliente" textAlignment="CENTER" wrappingWidth="187.99998891353607" />
+      <Text layoutX="481.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Venda" textAlignment="CENTER" wrappingWidth="187.99998891353607" />
+      <ImageView fitHeight="108.0" fitWidth="188.0" layoutX="481.0" layoutY="26.0" onMouseClicked="#BTNVenda">
+         <image>
+            <Image url="@../img/Venda.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="134.0" fitWidth="188.0" layoutX="41.0" layoutY="221.0" onMouseClicked="#btnADC">
+         <image>
+            <Image url="@../img/business_inventory_maintenance_product_box_boxes_2326.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="134.0" fitWidth="204.0" layoutX="473.0" layoutY="210.0" onMouseClicked="#BTNForncedor">
+         <image>
+            <Image url="@../img/fornecedor.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

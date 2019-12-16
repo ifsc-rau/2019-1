@@ -205,10 +205,6 @@ function selectionDay(dia, mes, ano) {
             $('#' + id).css('background-color', '#00b3b3');// Essa cor é para Férias docentes
             cor = '#00b3b3';
             break;
-        case 3:
-            $('#' + id).css('background-color', '#ff0000');// Essa cor é para Feriados e pontos facultativos
-            cor = '#ff0000';
-            break;
         case 4:
             $('#' + id).css('background-color', '#ff9933');// Essa cor é para Recesso (com reposição de acordo com necessidade institucional)
             cor = '#ff9933';
@@ -221,7 +217,6 @@ function selectionDay(dia, mes, ano) {
             $('#' + id).css('background-color', '#ffff00');// Essa cor é para Solenidades de colação de grau e formatura – data prevista
             cor = '#ffff00';
             break;
-            2
         case 7:
             if (data.getDay() === 0) {
                return messageError("Não pode ser inserido dias letivos\n" +
@@ -251,6 +246,87 @@ function selectionDay(dia, mes, ano) {
                     '<th style="padding-right: 10px;">' + dateAux + '/' + returnMonthAbbreviation(retornarIdData(id).getMonth()) + '</th>' +
                     '<th class="texto-legenda"><input id="input' + id + '" type="text" style="font-weight: bold; color: #212529" /></th>' +
                     '</tr>');
+
+                const lastDayYear = new Date(year + 1, 0, 1);
+                let days = [];
+                for (let dia = new Date(year, 0, 1); dia <= lastDayYear; dia.setDate(dia.getDate() + 1)) {
+                    if(dia.getFullYear() === year) {
+                        let id = returnId(dia);
+                        if ($('#' + id).css('background-color') === 'rgb(255, 0, 0)') {
+                            let dad = $('#tdLegendsHolidays' + id);
+
+                            if (dad !== undefined) {
+                                let last = dad.children().last();
+                                last = last.children().first();
+                                days.push({
+                                    "date": returnIdByDate(id),
+                                    "description": last.val()
+                                })
+                            }
+                        }
+                    }
+                }
+
+                $('#tableLegendaFeriados tr').remove();
+                $('#tableLegendaFeriados').append('<tr><th id="headerLegendaFeriados" colspan="2">FERIADOS - ' + year + '</th></tr>');
+
+                for (var i = 0; i < days.length; i++) {
+                    let {date, description} = days[i];
+                    let identity = returnId(date);
+                    var month = date.getMonth();
+                    var day = date.getDate();
+                    if (day < 10) {
+                        day = '0' + day;
+                    }
+
+                    switch (month) {
+                        case 0:
+                            month = 'Jan';
+                            break;
+                        case 1:
+                            month = 'Fev';
+                            break;
+                        case 2:
+                            month = 'Mar';
+                            break;
+                        case 3:
+                            month = 'Abr';
+                            break;
+                        case 4:
+                            month = 'Mai';
+                            break;
+                        case 5:
+                            month = 'Jun';
+                            break;
+                        case 6:
+                            month = 'Jul';
+                            break;
+                        case 7:
+                            month = 'Ago';
+                            break;
+                        case 8:
+                            month = 'Set';
+                            break;
+                        case 9:
+                            month = 'Out';
+                            break;
+                        case 10:
+                            month = 'Nov';
+                            break;
+                        case 11:
+                            month = 'Dez';
+                            break;
+                    }
+                    day = day + '/' + month;
+                    $('#tableLegendaFeriados').append('<tr id="tdLegendsHolidays' + identity + '" >' +
+                        '<th style="padding-right: 10px; width: 20px;  ">' + day + '</th>' +
+                        '<th class="texto-legenda"><input id="input' + identity + '" type="text" style="font-weight: bold; color: #212529" /></th>' +
+                        '</tr>');
+
+                    $('#input' + identity).val(description)
+                }
+
+                console.log(days);
                 holidaysCity.push(id);
                 $('#input' + id + '').focus();
             }
@@ -263,7 +339,6 @@ function selectionDay(dia, mes, ano) {
             clearHolidaysCity(id)
         }
     }
-
 
     returnDays('rgb(0, 179, 179)');
     findByDaysSchool();
@@ -579,9 +654,11 @@ $(document).ready(async function () {
                 } else if (typeDate === 'Férias docentes') {
                     $("#" + identity).css('background-color', 'rgb(0, 179, 179)');
                 } else if (typeDate === 'Feriados e pontos facultativos' && description === 'Ponto facultativo') {
+                    console.log('a')
                     $("#" + identity).css('background-color', 'rgb(255, 0, 0)');
                 } else if (typeDate === 'Feriados e pontos facultativos' && description !== 'Ponto facultativo') {
-                    $("#" + identity).css('background-color', 'rgb(255, 0, 0)');
+                    console.log('b')
+
                     holidaysCity.push(identity);
                     holidaysObjects.push(Dates[i]);
                 } else if (typeDate === 'Recesso (com reposição de acordo com necessidade institucional)') {
@@ -623,8 +700,86 @@ $(document).ready(async function () {
         $('#div-legendaFeriados').append('<table id="tableLegendaFeriados"></table>');
         $('#tableLegendaFeriados').append('<tr><th id="headerLegendaFeriados" colspan="2">FERIADOS - ' + year + '</th></tr>');
         for (var i = 0; i < holidaysObjects.length; i++) {
-
             let {date, description} = holidaysObjects[i];
+            let identity = returnId(date);
+            $("#" + identity).css('background-color', 'rgb(255, 0, 0)');
+
+            var month = date.getMonth();
+            var day = date.getDate();
+            if (day < 10) {
+                day = '0' + day;
+            }
+
+            switch (month) {
+                case 0:
+                    month = 'Jan';
+                    break;
+                case 1:
+                    month = 'Fev';
+                    break;
+                case 2:
+                    month = 'Mar';
+                    break;
+                case 3:
+                    month = 'Abr';
+                    break;
+                case 4:
+                    month = 'Mai';
+                    break;
+                case 5:
+                    month = 'Jun';
+                    break;
+                case 6:
+                    month = 'Jul';
+                    break;
+                case 7:
+                    month = 'Ago';
+                    break;
+                case 8:
+                    month = 'Set';
+                    break;
+                case 9:
+                    month = 'Out';
+                    break;
+                case 10:
+                    month = 'Nov';
+                    break;
+                case 11:
+                    month = 'Dez';
+                    break;
+            }
+            day = day + '/' + month;
+            $('#tableLegendaFeriados').append('<tr id="tdLegendsHolidays' + identity + '" >' +
+                '<th style="padding-right: 10px; width: 20px;  ">' + day + '</th>' +
+                '<th class="texto-legenda"><input id="input' + identity + '" type="text" style="font-weight: bold; color: #212529" /></th>' +
+                '</tr>');
+
+            $('#input' + identity).val(description)
+        }
+
+        const lastDayYear = new Date(year + 1, 0, 1);
+        let days = [];
+        for (let dia = new Date(year, 0, 1); dia <= lastDayYear; dia.setDate(dia.getDate() + 1)) {
+            let id = returnId(dia);
+            if($('#' + id).css('background-color')=== 'rgb(255, 0, 0)')        {
+                let dad = $('#tdLegendsHolidays' + id);
+
+                if (dad !== undefined) {
+                    let last = dad.children().last();
+                    last = last.children().first();
+                    days.push({
+                        "date": returnIdByDate(id),
+                        "description": last.val()
+                    })
+                }
+            }
+
+        }
+        $('#tableLegendaFeriados tr').remove();
+        $('#tableLegendaFeriados').append('<tr><th id="headerLegendaFeriados" colspan="2">FERIADOS - ' + year + '</th></tr>');
+
+        for (var i = 0; i < days.length; i++) {
+            let {date, description} = days[i];
             let identity = returnId(date);
             var month = date.getMonth();
             var day = date.getDate();
@@ -671,7 +826,6 @@ $(document).ready(async function () {
                     break;
             }
             day = day + '/' + month;
-            console.log('aaa')
             $('#tableLegendaFeriados').append('<tr id="tdLegendsHolidays' + identity + '" >' +
                 '<th style="padding-right: 10px; width: 20px;  ">' + day + '</th>' +
                 '<th class="texto-legenda"><input id="input' + identity + '" type="text" style="font-weight: bold; color: #212529" /></th>' +
@@ -715,7 +869,8 @@ $(document).ready(async function () {
                         } else if (backgroundColor === 'rgb(255, 0, 0)') {
                             let dad = $('#tdLegendsHolidays' + id);
 
-                            if (dad !== undefined) {
+                            console.log(dad.attr('id'))
+                            if (dad.attr('id') !== undefined) {
                                 let last = dad.children().last();
 
                                 last = last.children().first();
@@ -764,10 +919,8 @@ $(document).ready(async function () {
             let calendar = new Calendario(idCalendar, ano, titulo, subtitulo, liberar, null, sent, user, arrayObjectData);
             let response = await Calendario.put(calendar);
             if (response === 'true') {
-                menssagemSucess('Calendário alterado com sucesso :)', 'MyCalendars.xhtml');
+                menssagemSucess('Calendário alterado com sucesso :)', null);
             }
-
-
         } else {
             return messageError('Ops, cada semestre precisa ter no mínimo 100(cem)<br/>' +
                 'dias letivos.');

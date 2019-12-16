@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="AnchorPaneVenda" prefHeight="582.0" prefWidth="1472.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerVenda">
+   <children>
+      <TableView fx:id="TableViewVenda" layoutX="640.0" layoutY="-3.0" prefHeight="585.0" prefWidth="834.0" style="-fx-background-color: white; -fx-border-color: black; -fx-font-size: 20px;">
+         <columns>
+            <TableColumn fx:id="tableColunNomeCliente" prefWidth="225.6666259765625" text="Nome Comprador" />
+            <TableColumn fx:id="tableColunTelefone" prefWidth="125.3333740234375" text="Telefone" />
+            <TableColumn fx:id="tableColunProduto" prefWidth="158.33349609375" text="Produto" />
+            <TableColumn fx:id="tableColunqUANTID" prefWidth="74.66650390625" text="Quant" />
+            <TableColumn fx:id="tableColunDataCompra" prefWidth="133.6666259765625" text="Data Compra" />
+            <TableColumn fx:id="tableColunVALORvENDA" minWidth="0.0" prefWidth="108.3333740234375" style="-fx-background-color: #4059a9;" text="Valor" />
+         </columns>
+      </TableView>
+      <Text layoutX="59.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Nome do comprador" wrappingWidth="244.99998891353607" />
+      <Text layoutX="126.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Produto" wrappingWidth="95.00001156330109" />
+      <Text layoutX="325.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Quantidade desejada " wrappingWidth="244.999960064888" />
+      <JFXButton fx:id="JBTSalvar" layoutX="40.0" layoutY="471.0" onAction="#OnACJBTSalvar" prefHeight="55.0" prefWidth="210.0" style="-fx-background-color: #ff3b45; -fx-text-fill: white; -fx-font-family: Quicksan; -fx-font-weight: bold;" text="SALVAR" />
+      <JFXButton fx:id="JBTRemover" layoutX="358.0" layoutY="471.0" onAction="#onActionApagaVenda" prefHeight="55.0" prefWidth="210.0" style="-fx-background-color: #ff3b45; -fx-text-fill: white; -fx-font-family: Quicksan; -fx-font-weight: bold;" text="REMOVER" />
+      <Text layoutX="271.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="  VENDA" wrappingWidth="117.00001913309097" />
+      <JFXComboBox fx:id="JFXComboNomeComprador" layoutX="89.0" layoutY="136.0" onAction="#OnComboNome" onMouseClicked="#pegavalor" prefHeight="25.0" prefWidth="171.0" />
+      <JFXComboBox fx:id="JFXComboEscoProduto" layoutX="76.0" layoutY="266.0" onAction="#OnComboProduto" onMouseClicked="#pegavalor1" prefHeight="25.0" prefWidth="171.0" />
+      <JFXTextField fx:id="JTFXQuantidadeVenda" layoutX="362.0" layoutY="266.0" prefHeight="25.0" prefWidth="171.0" />
+      <Label fx:id="LabelQNTDdisponivel" layoutX="491.0" layoutY="302.0" prefHeight="17.0" prefWidth="109.0" text="0" />
+      <Text layoutX="353.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Quantidade disponivel" textAlignment="CENTER" wrappingWidth="134.99997574090958" />
+      <Text layoutX="330.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Telefone do comprador" wrappingWidth="291.999960064888" />
+      <JFXTextField fx:id="JTFXTelefone" layoutX="363.0" layoutY="134.0" prefHeight="25.0" prefWidth="171.0" />
+      <JFXDatePicker fx:id="DataCompra" defaultColor="#8f2323" layoutX="87.0" layoutY="372.0" />
+      <Text layoutX="66.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Data da compra" wrappingWidth="188.0000115633011" />
+      <Text layoutX="406.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Valor" wrappingWidth="82.999960064888" />
+      <JFXTextField fx:id="JTFXValor" layoutX="388.0" layoutY="372.0" prefHeight="25.0" prefWidth="95.0" />
+      <JFXButton fx:id="JBTMenu" layoutX="267.0" layoutY="471.0" onAction="#menu" prefHeight="55.0" prefWidth="77.0" style="-fx-background-color: #ff3b45; -fx-text-fill: white; -fx-font-family: Quicksan; -fx-font-weight: bold;" text="MENU" />
+      <JFXCheckBox fx:id="jfxCheckVEZES" checkedColor="#d7d3d3" ellipsisString="" layoutX="583.0" layoutY="559.0" onAction="#OnACtionCheckVEZES" prefHeight="18.0" prefWidth="1.0" unCheckedColor="#dad9d9" />
+      <Label fx:id="LabelValor" layoutX="490.0" layoutY="409.0" prefHeight="17.0" prefWidth="109.0" text="0" />
+      <Text layoutX="352.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 1em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Valor por produto" textAlignment="CENTER" wrappingWidth="134.99997574090958" />
+   </children>
+</AnchorPane>

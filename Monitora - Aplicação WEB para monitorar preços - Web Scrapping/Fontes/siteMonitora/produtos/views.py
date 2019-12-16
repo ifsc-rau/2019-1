@@ -13,6 +13,9 @@ from django.views import View
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.utils import timezone
+from datetime import timedelta
+import pytz
 import json
 import re
 import requests
@@ -24,6 +27,8 @@ import apscheduler
 scheduler = BackgroundScheduler()
 scheduler.start()
 scheduler.print_jobs()
+
+
 
 def index(request):
     produtos = Produto.objects.all().order_by('data_cadastro')
@@ -233,6 +238,7 @@ def atualizaPreco(produto):
     hist = HistoricoPreco()
     hist.preco = novo_preco['preco'][0]
     hist.produto = p
+    hist.data = timezone.make_aware(datetime.datetime.now(),timezone.get_default_timezone())
     hist.save()
 
 def addNotificacao(produto):
@@ -258,22 +264,39 @@ def deleteProd(request):
             produto.delete()    
         else: 
             produto.user.remove(request.user)
-        return JsonResponse({"success": "Produto excluído da sua lista"})
+        
+        json = {'success': 'Produto removido!'}
+            
     except Produto.DoesNotExist:
-        return JsonResponse({"error": "Desculpe, houve um problema"})  
+        json = {'error': "Desculpe, houve um problema"}
     except apscheduler.jobstores.base.JobLookupError:
         produto.delete() 
-        return JsonResponse({"success": "Produto excluído da sua lista"})
+        json = {'success': 'Produto removido!'}
+
+    return JsonResponse(json)
 
 def detalheProduto(request, id_produto):
     context = {}
+
+    if request.method == 'POST':
+        produto = Produto.objects.get(id_produto = id_produto)
+        produto.nome = request.POST['nome']
+        produto.tempo_notificacao = request.POST['tempo_atualizacao']
+        produto.save()
+        try:
+            job = scheduler.get_job(str(produto.id_produto))
+            job.modify(minutes= int(produto.tempo_notificacao))
+        except:
+            pass
     try:
         produto = Produto.objects.get(id_produto = id_produto)
+        atualiza(produto)
         historico = HistoricoPreco.objects.all().filter(produto = produto).values('data', 'preco')
 
         def myconverter(o):
             if isinstance(o, datetime):
-                return o.__str__()
+                o = o - timedelta(hours=3)
+                return o.strftime("%d/%m/%y %H:%M")
 
         historico_json = json.dumps(list(historico), default= myconverter)
         context = {'produto': produto, 'historico': historico_json}
@@ -281,3 +304,12 @@ def detalheProduto(request, id_produto):
     except Exception as e:
         messages.error(request, e)
         return render(request, 'detalhe_produto.html', context)
+
+def atualiza(produto):
+    try:
+        last_preco = str(HistoricoPreco.objects.all().filter(produto_id=produto.id_produto).last())
+        produto.preco_atual = last_preco
+        produto.save()
+    except:
+        pass
+

@@ -1,0 +1,17 @@
+---  Site MONITORA ---
+
+Para a execução desse projeto é necessária a que a máquina possua:
+    -   Instalação do Python 3.7.4 ou superior;
+    -   Gerenciador de pacotes pip 19.2.1 ou superior;
+    -   Banco de dados MySQL.
+
+A configuração das credenciais do banco de dados se faz no arquivo settings.py (siteMonitora/siteMonitora/settings.py)
+na variável 'DATABASES'.
+
+Antes de rodar o servidor é necessário fazer alguns procedimentos na pasta 'siteMonitora' :
+    -   Rodar o comando 'pip install -r requirements.txt', para instalar as dependências;
+    -   Rodar o comando 'python manage.py makemigrations';
+    -   Rodar o comando 'python manage.py migrate', para criar as tabelas do banco de dados;
+    -   Rodar o comando 'python manage.py runserver', para rodar o servidor;
+
+    

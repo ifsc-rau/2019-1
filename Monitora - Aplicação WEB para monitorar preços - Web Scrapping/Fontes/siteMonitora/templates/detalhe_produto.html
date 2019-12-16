@@ -11,7 +11,9 @@
 {% block content %}
 <script type="text/javascript">
     var hist = {{ historico|safe }};
+
 </script>
+
 
 <div class="container-fluid usuario">
         <div class="sidebar-user">
@@ -20,8 +22,6 @@
                         <span data-feather="user" class="sidebar-icon"></span>Dados pessoais</a>
                     <a class="btn list-group-item active" id="button-produto" href="{% url 'user:painel_produtos' %}"><span data-feather="package"
                             class="sidebar-icon"></span>Produtos cadastrados</a>
-                    <a class="btn list-group-item" href=""><span data-feather="info"
-                            class="sidebar-icon"></span>Informações</a>
                 </div>
             </div>
     <div class="user-details">
@@ -43,6 +43,8 @@
             <div id="userbody" class="user-body">
                 <div class="row page-title justify-content-between">
                     <h3>{{ produto.nome }} </h3>
+                    <button title="Excluir produto" class="btn btn-danger delete_prod delete_prod_btn" id="delete_prod_btn"
+                    prod_id="{{ produto.id_produto }}">Excluir produto</button>
                 </div>
                 <div class="container-fluid row produtos-display detalhe-prod">
             
@@ -50,7 +52,7 @@
                                 <div class="label row justify-content-between">
                                     <label>Informações</label>
                                     <button class="btn button-outline-custom button-page-user" data-toggle="modal"
-                                        data-target="#userInfoModal">Editar</button>
+                                        data-target="#prodEditModal">Editar</button>
                                 </div>
                                 <div class="container-fluid info col">
                                     <div class="row">
@@ -110,5 +112,36 @@
     </div>
 </div>
 
+<div class="modal fade" id="prodEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Informações do produto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" class="form-control loginInput cadastroInput" value="{{ produto.nome }}"
+                            id="id_nome" name="nome" required>
+                        <label>Tempo de atualização</label>
+                        <input type="number" class="form-control loginInput cadastroInput" max='3600' min='5' value="{{ produto.tempo_notificacao }}"
+                            id="id_tempo" name="tempo_atualizacao" required>
+                    </div>
+
+                    <button type="submit" class="btn button-outline-custom">Salvar alterações</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

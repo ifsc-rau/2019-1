@@ -69,17 +69,20 @@
         <div class="row justify-content-center produtos-display">
             
             {% for prod_user in produtos_user %}
-            <div class="card card-expandable">
-
-
+            <div class="card card-expandable" id="{{ prod_user.id_produto }}">
+        
+        
                 <div class="card-body">
+                    <a href="{{ prod_user.url }}" target="_blank" 
+                        class="urllink" title="Ir para o site">
+                        <span data-feather="external-link"></span></a>
 
                     <h2 class="card-text-descricao">{{prod_user.nome}}</h2>
                     <p class="card-text-preco">{{prod_user.descricao}}</p>
                     <div class="row justify-content-around card-btn">
-                        <a id="urllink" href="{{ prod_user.url }}" target="_blank" class="btn button-outline-custom">Ir
-                            para o site</a>
-
+                        <a href="{% url 'user:detalhe_prod' prod_user.id_produto %}" 
+                        class="btn button-outline-custom"><span data-feather="plus-circle"></span>
+                         Detalhes</a>
                     </div>
                 </div>
                 <div class="card-title">
@@ -92,4 +95,5 @@
     </div>
 
     <!-- MODAL -->
+    
 {% endblock %}

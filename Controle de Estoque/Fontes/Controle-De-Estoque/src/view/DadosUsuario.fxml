@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="JCBInformacao" prefHeight="249.0" prefWidth="732.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerUsuario">
+   <children>
+      <Text layoutX="79.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Nome" wrappingWidth="88.99998891353607" />
+      <Text layoutX="483.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Telefone" wrappingWidth="108.99998891353607" />
+      <Text layoutX="501.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Email" wrappingWidth="72.99999255065813" />
+      <Text layoutX="286.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="USUÁRIO" wrappingWidth="124.99998891353607" />
+      <Label fx:id="LabelNomeUsuario" layoutX="35.0" layoutY="143.0" prefHeight="17.0" prefWidth="196.0" text="n" />
+      <Label fx:id="LabelTelefone" layoutX="428.0" layoutY="139.0" prefHeight="17.0" prefWidth="196.0" text="t" />
+      <Label fx:id="LabelIdade" layoutX="26.0" layoutY="232.0" prefHeight="17.0" prefWidth="196.0" text="i" />
+      <Label fx:id="LabelEmail" layoutX="428.0" layoutY="231.0" prefHeight="17.0" prefWidth="196.0" text="e" />
+      <Text layoutX="79.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 2em; -fx-font-family: Quicksan; -fx-font-weight: bold; -fx-fill: #ff3b49;" text="Idade" wrappingWidth="72.99999255065813" />
+      <JFXButton fx:id="JBTMenu" layoutX="186.0" layoutY="281.0" onAction="#menu" prefHeight="79.0" prefWidth="326.0" style="-fx-background-color: #ff3b45; -fx-text-fill: white; -fx-font-family: Quicksan; -fx-font-weight: bold;" text="MENU" />
+   </children>
+</AnchorPane>

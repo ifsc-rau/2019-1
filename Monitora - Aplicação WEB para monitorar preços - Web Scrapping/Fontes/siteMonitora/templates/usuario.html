@@ -13,8 +13,6 @@
                     class="sidebar-icon"></span>Dados pessoais</a>
             <a class="btn list-group-item" id="button-produto" href="{% url 'user:painel_produtos' %}">
                 <span data-feather="package" class="sidebar-icon"></span>Produtos cadastrados</a>
-            <a class="btn list-group-item" href=""><span data-feather="info"
-                    class="sidebar-icon"></span>Informações</a>
         </div>
     </div>
     <div class="user-details">
@@ -44,39 +42,33 @@
             </div>
             <div id="userbody" class="user-body">
                 <div class="label row justify-content-between">
-                    <label>Informações</label>
+                    <label>Informações Pessoais </label>
                     <button class="btn button-outline-custom button-page-user" data-toggle="modal"
                         data-target="#userInfoModal">Editar</button>
                 </div>
                 <div class="info justify-content-center">
-                    <table class="table profile-table">
-                        <tbody>
-                            <tr>
-                                <th scope="row">Nome:</th>
-                                <td>
-                                    <P>{{ user.first_name }} {{ user.last_name }}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">E-mail:</th>
-                                <td>
-                                    <P>{{ usuario.email }}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Telefone: </th>
-                                <td>
-                                    <P>{{ usuario.telefone }}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Data de nascimento: </th>
-                                <td>
-                                    <P>{{ usuario.data_nascimento }}</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="container-fluid info col-5">
+                        <div class="row">
+                            <div class="col-4"><b>Nome </b></div>
+                            <div class="col-6">{{ user.first_name }} {{ user.last_name }}</div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-4"><b>Email </b></div>
+                            <div class="col-6">{{ usuario.email }}</div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-4"><b>Telefone </b></div>
+                            <div class="col-6">{{ usuario.telefone }}</div>
+                        </div>
+                        <hr class="my-2">
+                        <div class="row">
+                            <div class="col-4"><b>Data de Nascimento </b></div>
+                            <div class="col-6">{{ usuario.data_nascimento }}</div>
+                        </div>
+                        <hr class="my-2">
+                    </div>
                 </div>
             </div>
         </div>
